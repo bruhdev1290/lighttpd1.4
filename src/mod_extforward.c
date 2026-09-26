@@ -1403,7 +1403,7 @@ static int hap_PROXY_recv (const int fd, union hap_PROXY_hdr * const hdr, const 
          #endif
           default: break;
         }
-        if (sz < 16 + addrlen)
+        if ((hdr->v2.ver_cmd & 0xF) == 0x01 && sz < 16 + addrlen)
             return -2; /* mismatch of hdr->v2.len and addr len */
     }
     else if (ret >= 8 && 0 == memcmp(hdr->v1.line, "PROXY", 5)) {
